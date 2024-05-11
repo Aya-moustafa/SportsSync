@@ -18,6 +18,13 @@
 		0098CF102BEE5F2300138570 /* SportsSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CF0F2BEE5F2300138570 /* SportsSyncUITests.swift */; };
 		0098CF122BEE5F2300138570 /* SportsSyncUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CF112BEE5F2300138570 /* SportsSyncUITestsLaunchTests.swift */; };
 		0098CF1F2BEE78F600138570 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CF1E2BEE78F600138570 /* HomeViewController.swift */; };
+		B99580B62BEF71A900454827 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99580B52BEF71A900454827 /* Teams.swift */; };
+		B99580B82BEF71E200454827 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99580B72BEF71E200454827 /* Player.swift */; };
+		E94B29B52BEF572D00DA993B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E94B29B42BEF572D00DA993B /* Alamofire */; };
+		E94B29B72BEF572D00DA993B /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E94B29B62BEF572D00DA993B /* AlamofireDynamic */; };
+		E957B7D72BEF49C4008194B3 /* LeagueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7D62BEF49C4008194B3 /* LeagueResponse.swift */; };
+		E957B7DB2BEF4A4F008194B3 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7DA2BEF4A4F008194B3 /* ApiService.swift */; };
+		E957B7DE2BEF4FE6008194B3 /* EventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7DD2BEF4FE6008194B3 /* EventsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +60,11 @@
 		0098CF0F2BEE5F2300138570 /* SportsSyncUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsSyncUITests.swift; sourceTree = "<group>"; };
 		0098CF112BEE5F2300138570 /* SportsSyncUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsSyncUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0098CF1E2BEE78F600138570 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B99580B52BEF71A900454827 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Teams.swift; path = SportsSync/Model/Teams.swift; sourceTree = SOURCE_ROOT; };
+		B99580B72BEF71E200454827 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E957B7D62BEF49C4008194B3 /* LeagueResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueResponse.swift; sourceTree = "<group>"; };
+		E957B7DA2BEF4A4F008194B3 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		E957B7DD2BEF4FE6008194B3 /* EventsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94B29B52BEF572D00DA993B /* Alamofire in Frameworks */,
+				E94B29B72BEF572D00DA993B /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +117,7 @@
 		0098CEEA2BEE5F2100138570 /* SportsSync */ = {
 			isa = PBXGroup;
 			children = (
+				E957B7D22BEF4919008194B3 /* Model */,
 				0098CEEB2BEE5F2100138570 /* AppDelegate.swift */,
 				0098CEED2BEE5F2100138570 /* SceneDelegate.swift */,
 				0098CEEF2BEE5F2100138570 /* ViewController.swift */,
@@ -133,6 +148,42 @@
 			path = SportsSyncUITests;
 			sourceTree = "<group>";
 		};
+		E957B7D22BEF4919008194B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E957B7D52BEF4987008194B3 /* Data */,
+				E957B7D42BEF495F008194B3 /* DB */,
+				E957B7D32BEF4939008194B3 /* Network Service */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E957B7D32BEF4939008194B3 /* Network Service */ = {
+			isa = PBXGroup;
+			children = (
+				E957B7DA2BEF4A4F008194B3 /* ApiService.swift */,
+			);
+			path = "Network Service";
+			sourceTree = "<group>";
+		};
+		E957B7D42BEF495F008194B3 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		E957B7D52BEF4987008194B3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E957B7D62BEF49C4008194B3 /* LeagueResponse.swift */,
+				E957B7DD2BEF4FE6008194B3 /* EventsResponse.swift */,
+				B99580B52BEF71A900454827 /* Teams.swift */,
+				B99580B72BEF71E200454827 /* Player.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,6 +200,10 @@
 			dependencies = (
 			);
 			name = SportsSync;
+			packageProductDependencies = (
+				E94B29B42BEF572D00DA993B /* Alamofire */,
+				E94B29B62BEF572D00DA993B /* AlamofireDynamic */,
+			);
 			productName = SportsSync;
 			productReference = 0098CEE82BEE5F2100138570 /* SportsSync.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +276,9 @@
 				Base,
 			);
 			mainGroup = 0098CEDF2BEE5F2000138570;
+			packageReferences = (
+				E94B29B32BEF572D00DA993B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 0098CEE92BEE5F2100138570 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -264,10 +322,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B99580B62BEF71A900454827 /* Teams.swift in Sources */,
+				E957B7D72BEF49C4008194B3 /* LeagueResponse.swift in Sources */,
 				0098CF1F2BEE78F600138570 /* HomeViewController.swift in Sources */,
 				0098CEF02BEE5F2100138570 /* ViewController.swift in Sources */,
+				E957B7DE2BEF4FE6008194B3 /* EventsResponse.swift in Sources */,
 				0098CEEC2BEE5F2100138570 /* AppDelegate.swift in Sources */,
 				0098CEEE2BEE5F2100138570 /* SceneDelegate.swift in Sources */,
+				E957B7DB2BEF4A4F008194B3 /* ApiService.swift in Sources */,
+				B99580B82BEF71E200454827 /* Player.swift in Sources */,
 				0098CEF62BEE5F2100138570 /* SportsSync.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +667,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E94B29B32BEF572D00DA993B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E94B29B42BEF572D00DA993B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E94B29B32BEF572D00DA993B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E94B29B62BEF572D00DA993B /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E94B29B32BEF572D00DA993B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0098CEF42BEE5F2100138570 /* SportsSync.xcdatamodeld */ = {
