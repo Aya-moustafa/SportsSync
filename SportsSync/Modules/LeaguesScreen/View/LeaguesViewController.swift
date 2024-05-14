@@ -15,11 +15,8 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
 
     @IBOutlet weak var sportsImg: UIImageView!
     @IBOutlet weak var leagueTable: UITableView!
+    var sport : String!
     var leagueViewModel : LeaguesViewModel?
-    var leaguesFootball : [League]?
-    var leaguesBasketball : [League]?
-    var leaguesTennis : [League]?
-    var leagueCricket : [League]?
     var isFootball : Bool = false
     var isBasketball : Bool = false
     var isTennis : Bool = false
@@ -27,7 +24,7 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        leagueTable.separatorStyle = .none
         // Set corner radius for leagueImg in the bottom corners only
         let cornerRadius: CGFloat = 25.0 // Adjust the value to your desired corner radius
                 let maskLayer = CAShapeLayer()
@@ -41,21 +38,25 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
         leagueTable.register(nib, forCellReuseIdentifier: "leaguecell")
     //    sportsImg.layer.cornerRadius = 30
         if isFootball == true {
+            sport = "football"
             sportText.text = "FOOTBALL LEAGUES"
             sportsImg.image = UIImage(named: "newfoo")
-            leagueViewModel?.loadData(endPoint: "football")
+            leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.football)
         }else if isBasketball == true {
+            sport = "basketball"
             sportText.text = "BASKETBALL LEAGUES"
             sportsImg.image = UIImage(named: "basketballback")
-            leagueViewModel?.loadData(endPoint: "basketball")
+            leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.basketball)
         }else if isTennis == true {
+            sport = "tennis"
             sportText.text = "TENNIS LEAGUES"
             sportsImg.image = UIImage(named: "tennisbackground")
-            leagueViewModel?.loadData(endPoint: "tennis")
+            leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.tennis)
         }else if isCricket == true {
+            sport = "cricket"
             sportText.text = "CRICKET LEAGUES"
             sportsImg.image = UIImage(named: "newfoo")
-            leagueViewModel?.loadData(endPoint: "cricket")
+            leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.cricket)
         }
         leagueViewModel?.bindLeaguesToViewController = { [weak self] in
             print ("inside bindLeaguesToViewController")
@@ -77,7 +78,7 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguecell", for: indexPath) as! LeagueTableViewCell
         
-        print("the leagues fetched \(leagueViewModel?.getResultLeagues()[indexPath.row].leagueName ?? "unknown")")
+       // print("the leagues fetched \(leagueViewModel?.getResultLeagues()[indexPath.row].leagueName ?? "unknown")")
         cell.leagueName.text = leagueViewModel?.getResultLeagues()[indexPath.row].leagueName
         cell.countryName.text = leagueViewModel?.getResultLeagues()[indexPath.row].countryName
         
@@ -120,9 +121,19 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   //         let details:ViewController = self.storyboard?.instantiateViewController(withIdentifier: "details") as! ViewController
+   //         details.movie = arr?[indexPath.row]
+   //         self.navigationController?.pushViewController(details, animated: true)
+            let savedLeague = leagueViewModel?.getResultLeagues()[indexPath.row]
+            leagueViewModel?.saveLeagueToCoreData(league: savedLeague ?? League(leagueKey: 0, leagueName: "unkown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""),sport: sport)
+            print("the saved leahue is \(savedLeague?.leagueName ?? "unknown")")
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Return the desired height for the cell at the specified indexPath
-        return 100 // Adjust this value to the desired height
+        return 90// Adjust this value to the desired height
     }
     
   
@@ -137,13 +148,6 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
         // Pass the selected object to the new view controller.
     }
     */
-
-    /* override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let details:ViewController = self.storyboard?.instantiateViewController(withIdentifier: "details") as! ViewController
-         details.movie = arr?[indexPath.row]
-         self.navigationController?.pushViewController(details, animated: true)
-     }*/
-     
      
      /*
      // Override to support conditional editing of the table view.
@@ -152,16 +156,6 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
          return true
      }
      */
-
-     
-     // Override to support editing the table view.
-     /*override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-         if editingStyle == .delete {
-             tableView.deleteRows(at: [indexPath], with: .fade)
-         } else if editingStyle == .insert {
-         }
-     }*/
-     
 
      /*
      // Override to support rearranging the table view.
