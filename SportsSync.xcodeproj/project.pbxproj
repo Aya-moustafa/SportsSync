@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		00970B532BF28A1E007241D9 /* SportsSync.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00970B512BF28A1E007241D9 /* SportsSync.xcdatamodeld */; };
 		00970B5F2BF2C038007241D9 /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00970B5E2BF2C038007241D9 /* ApiConstants.swift */; };
+		00972E6D2BF3E16B00CC123E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00972E6C2BF3E16B00CC123E /* NetworkManager.swift */; };
+		00972E702BF3E53000CC123E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 00972E6F2BF3E53000CC123E /* Reachability */; };
 		0098CEEC2BEE5F2100138570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CEEB2BEE5F2100138570 /* AppDelegate.swift */; };
 		0098CEEE2BEE5F2100138570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CEED2BEE5F2100138570 /* SceneDelegate.swift */; };
 		0098CEF02BEE5F2100138570 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CEEF2BEE5F2100138570 /* ViewController.swift */; };
@@ -58,6 +60,7 @@
 		00970B592BF2B8C3007241D9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00970B5A2BF2B8C5007241D9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		00970B5E2BF2C038007241D9 /* ApiConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
+		00972E6C2BF3E16B00CC123E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0098CEE82BEE5F2100138570 /* SportsSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0098CEEB2BEE5F2100138570 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0098CEED2BEE5F2100138570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E81E6ED62BEFC5D300AC2DD6 /* Kingfisher in Frameworks */,
+				00972E702BF3E53000CC123E /* Reachability in Frameworks */,
 				00A9E74B2BEFF37E0023B4E3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +275,7 @@
 			children = (
 				E957B7DA2BEF4A4F008194B3 /* ApiService.swift */,
 				E81E6ED22BEFBD4900AC2DD6 /* NetworkProtocol.swift */,
+				00972E6C2BF3E16B00CC123E /* NetworkManager.swift */,
 			);
 			path = "Network Service";
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 			packageProductDependencies = (
 				E81E6ED52BEFC5D300AC2DD6 /* Kingfisher */,
 				00A9E74A2BEFF37E0023B4E3 /* Alamofire */,
+				00972E6F2BF3E53000CC123E /* Reachability */,
 			);
 			productName = SportsSync;
 			productReference = 0098CEE82BEE5F2100138570 /* SportsSync.app */;
@@ -390,6 +396,7 @@
 			packageReferences = (
 				E81E6ED42BEFC5D300AC2DD6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00A9E7492BEFF37E0023B4E3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				00972E6E2BF3E53000CC123E /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 			);
 			productRefGroup = 0098CEE92BEE5F2100138570 /* Products */;
 			projectDirPath = "";
@@ -435,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00972E6D2BF3E16B00CC123E /* NetworkManager.swift in Sources */,
 				B99580B62BEF71A900454827 /* Teams.swift in Sources */,
 				E81E6ED12BEFB09800AC2DD6 /* LeaguesViewModel.swift in Sources */,
 				E957B7D72BEF49C4008194B3 /* LeagueResponse.swift in Sources */,
@@ -771,6 +779,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		00972E6E2BF3E53000CC123E /* XCRemoteSwiftPackageReference "Reachability.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		00A9E7492BEFF37E0023B4E3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -790,6 +806,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		00972E6F2BF3E53000CC123E /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00972E6E2BF3E53000CC123E /* XCRemoteSwiftPackageReference "Reachability.swift" */;
+			productName = Reachability;
+		};
 		00A9E74A2BEFF37E0023B4E3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 00A9E7492BEFF37E0023B4E3 /* XCRemoteSwiftPackageReference "Alamofire" */;

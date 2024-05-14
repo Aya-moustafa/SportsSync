@@ -99,5 +99,22 @@ class CoreDataHandler {
         return leaguesEntity.contains(where: {$0.leagueKey == favLeague.leagueKey ?? -1})
     }
     
+  /*  func getSportOfLeague (league : League) -> String {
+        let leagueSport = leaguesEntity[index].sport
+        guard let sport = leagueSport else {
+            return
+        }
+        
+        switch sport {
+        case "basketball":
+            return "basketball"
+        case "tennis" :
+            return "tennis"
+        case "cricket" :
+            return "cricket"
+        default:
+            return "football"
+        }
+    }*/
     
 }

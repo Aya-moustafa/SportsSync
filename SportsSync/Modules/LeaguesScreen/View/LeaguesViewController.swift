@@ -64,8 +64,29 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
                 self?.leagueTable.reloadData()
             }
         }
+        NetworkManager.shared.startMonitoring()
+        NotificationCenter.default.addObserver(self, selector:  #selector(handleNetworkRestored), name: .networkRestored, object: nil)
         // Do any additional setup after loading the view.
     }
+    
+    
+    @objc func handleNetworkRestored () {
+        if isFootball {
+                   leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.football)
+               } else if isBasketball {
+                   leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.basketball)
+               } else if isTennis {
+                   leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.tennis)
+               } else if isCricket {
+                   leagueViewModel?.loadData(endPoint: ApiConstants.Endpoints.cricket)
+               }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .networkRestored, object: nil)
+    }
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

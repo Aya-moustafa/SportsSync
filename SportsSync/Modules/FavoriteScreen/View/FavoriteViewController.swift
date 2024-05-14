@@ -11,13 +11,20 @@ import Kingfisher
 class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableViewDataSource, FavoriteLeaguesView {
 
     
+   
+    @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var favPlaceHolderImage: UIImageView!
     var isFootball : Bool = false
     var favLeaguesViewModel : FavoriteViewModel?
     var defaultLeague : League?
+    var sports = ["football" , "basketball" , "tennis" , ""]
     @IBOutlet weak var favoriteTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultLeague = League(leagueKey: 0, leagueName: "Unknown", countryKey: 0, countryName: "Unknown", leagueLogo: "", countryLogo: "")
+        favPlaceHolderImage?.image = UIImage(named: "nofav-removebg-preview")
+        placeholderLabel.isHidden = true
+        favPlaceHolderImage.isHidden = true
         favLeaguesViewModel = FavoriteViewModel()
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
@@ -49,7 +56,16 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("the number of favorite leagues is = \(favLeaguesViewModel?.favoriteLeagues.count ?? 0)")
-        return favLeaguesViewModel?.favoriteLeagues.count ?? 0
+        let count = favLeaguesViewModel?.favoriteLeagues.count ?? 0
+               if count == 0 {
+                  favPlaceHolderImage.isHidden = false
+                   placeholderLabel.isHidden = false
+                   return 0
+               } else {
+                   favPlaceHolderImage.isHidden = true
+                   placeholderLabel.isHidden = true
+                   return count
+               }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
