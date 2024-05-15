@@ -13,19 +13,23 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     
    
    // @IBOutlet weak var placeholderLabel: UILabel!
+    @IBOutlet weak var placeHolderLabel: UILabel!
     @IBOutlet weak var favPlaceHolderImage: UIImageView!
     var isFootball : Bool = false
-    var favLeaguesViewModel : FavoriteViewModel?
+    var favLeaguesViewModel : LeaguesViewModel?
     var defaultLeague : League?
+    var sport : String?
     var sports = ["football" , "basketball" , "tennis" , ""]
     @IBOutlet weak var favoriteTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.favoriteTable.reloadData()
         defaultLeague = League(leagueKey: 0, leagueName: "Unknown", countryKey: 0, countryName: "Unknown", leagueLogo: "", countryLogo: "")
         favPlaceHolderImage?.image = UIImage(named: "nofav-removebg-preview")
       //  placeholderLabel.isHidden = true
         favPlaceHolderImage.isHidden = true
-        favLeaguesViewModel = FavoriteViewModel()
+        placeHolderLabel.isHidden = true
+        favLeaguesViewModel = LeaguesViewModel()
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
         let nib = UINib(nibName: "LeagueTableViewCell", bundle: nil)
@@ -59,11 +63,11 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
         let count = favLeaguesViewModel?.favoriteLeagues.count ?? 0
                if count == 0 {
                   favPlaceHolderImage.isHidden = false
-              //     placeholderLabel.isHidden = false
+                   placeHolderLabel.isHidden = false
                    return 0
                } else {
                    favPlaceHolderImage.isHidden = true
-              //     placeholderLabel.isHidden = true
+                   placeHolderLabel.isHidden = true
                    return count
                }
     }
@@ -71,8 +75,8 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguecell", for: indexPath) as! LeagueTableViewCell
         print("the leaguee name from fetching \(favLeaguesViewModel?.favoriteLeagues[0].leagueName ?? "")")
+        //sport = favLeaguesViewModel?.favoriteLeagues[indexPath.row].
         let league = favLeaguesViewModel?.favoriteLeagues[indexPath.row]
-        cell.favBtn.isHidden = true
         cell.leagueName.text = favLeaguesViewModel?.favoriteLeagues[indexPath.row].leagueName
         cell.countryName.text = favLeaguesViewModel?.favoriteLeagues[indexPath.row].countryName
         if let leagueLogo = league?.leagueLogo, let imageURL = URL(string: leagueLogo) {
@@ -81,9 +85,9 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
             cell.leagueImg.image = UIImage(named: "placeh")
         }
         if let countryLogo = league?.countryLogo, let countryURL = URL(string: countryLogo) {
-            cell.countryLogo.kf.setImage(with: countryURL, placeholder: UIImage(named: "placeh"))
+            cell.countryLogo.kf.setImage(with: countryURL, placeholder: UIImage(named: "flagPlaceholder"))
         } else {
-            cell.countryLogo.image = UIImage(named: "placeh")
+            cell.countryLogo.image = UIImage(named: "flagPlaceholder")
         }
         
         return cell
@@ -104,11 +108,13 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     }
     */
 
-    /* override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let details:ViewController = self.storyboard?.instantiateViewController(withIdentifier: "details") as! ViewController
-         details.movie = arr?[indexPath.row]
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         let details = self.storyboard?.instantiateViewController(withIdentifier: "eventScreen") as! EventsCollectionViewController
+        // details.leagueSport = sport
+         details.savedLeague = favLeaguesViewModel?.favoriteLeagues[indexPath.row]
+         details.isFavorite = true
          self.navigationController?.pushViewController(details, animated: true)
-     }*/
+     }
      
      
      /*
@@ -123,17 +129,27 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
      // Override to support editing the table view.
       func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {
-             let index = indexPath.row
-             let leagueToDelete = favLeaguesViewModel?.favoriteLeagues[index]
-             favLeaguesViewModel?.favoriteLeagues.remove(at: index)
-             favoriteTable.deleteRows(at: [indexPath], with: .fade)
-             if let league = leagueToDelete {
-                             favLeaguesViewModel?.deleteLeagueFromCD(league: league)
-             }
-            // self.favoriteTable.reloadData()
-             print("the league that you want to delete is \(leagueToDelete?.leagueName ?? "")")
+             
+             let alertController = UIAlertController(title: "Delete League", message: "Are you sure you want to delete this league from your favorites?", preferredStyle: .alert)
+                     
+                     let confirmAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+                         let index = indexPath.row
+                         if let leagueToDelete = self.favLeaguesViewModel?.favoriteLeagues[index] {
+                             self.favLeaguesViewModel?.favoriteLeagues.remove(at: index)
+                             tableView.deleteRows(at: [indexPath], with: .fade)
+                             self.favLeaguesViewModel?.deleteLeagueFromCD(league: leagueToDelete)
+                             print("The league that you want to delete is \(leagueToDelete.leagueName ?? "")")
+                         }
+                     }
+
+                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+                     alertController.addAction(confirmAction)
+                     alertController.addAction(cancelAction)
+     
+                     present(alertController, animated: true, completion: nil)
          } else if editingStyle == .insert {
-         }
+                 }
      }
      
 

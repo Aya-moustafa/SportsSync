@@ -23,14 +23,12 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
     var isCricket : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         leagueTable.separatorStyle = .none
         // Set corner radius for leagueImg in the bottom corners only
         let cornerRadius: CGFloat = 25.0 // Adjust the value to your desired corner radius
-                let maskLayer = CAShapeLayer()
-                maskLayer.path = UIBezierPath(roundedRect: sportsImg.bounds, byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
-                sportsImg.layer.mask = maskLayer
-        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: sportsImg.bounds, byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath 
         leagueViewModel = LeaguesViewModel()
         leagueTable.delegate = self
         leagueTable.dataSource = self
@@ -99,10 +97,14 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguecell", for: indexPath) as! LeagueTableViewCell
         
+//        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 80))
+//        paddingView.addSubview(cell.contentView)
+//        cell.contentView.frame = CGRect(x: 10, y: 5, width: paddingView.frame.width - 20, height: paddingView.frame.height - 10)
+//        cell.contentView.layer.cornerRadius = 30
+        
        // print("the leagues fetched \(leagueViewModel?.getResultLeagues()[indexPath.row].leagueName ?? "unknown")")
         cell.leagueName.text = leagueViewModel?.getResultLeagues()[indexPath.row].leagueName
         cell.countryName.text = leagueViewModel?.getResultLeagues()[indexPath.row].countryName
-        
         if let leagueL = leagueViewModel?.getResultLeagues()[indexPath.row].leagueLogo  {
            // let baseURL = "https://image.tmdb.org/t/p/w500/"
             let imageURL = URL(string: leagueL)
@@ -126,7 +128,7 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
             let countryURl = URL(string: countryL)
             
             // Use Kingfisher to set the image from URL
-            cell.countryLogo.kf.setImage(with: countryURl, placeholder: UIImage(named: "placeh"), options: [.transition(.fade(0.2))], completionHandler: { result in
+            cell.countryLogo.kf.setImage(with: countryURl, placeholder: UIImage(named: "flagPlaceholder"), options: [.transition(.fade(0.2))], completionHandler: { result in
                 switch result {
                 case .success(_):
                     print("Image loaded successfully")
@@ -136,26 +138,26 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
             })
         } else {
             // Handle case where leagueLogo URL is nil
-            cell.leagueImg.image = UIImage(named: "placeh")
+            cell.countryLogo.image = UIImage(named: "flagPlaceholder")
         }
+        
+        
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let details = self.storyboard?.instantiateViewController(withIdentifier: "eventScreen") as! EventsCollectionViewController
-          //  details.movie = arr?[indexPath.row]
+            details.leagueSport = sport
+            details.savedLeague = leagueViewModel?.getResultLeagues()[indexPath.row]
+        details.isFavorite = leagueViewModel?.isFav(league:  (leagueViewModel?.getResultLeagues()[indexPath.row])!)
             self.navigationController?.pushViewController(details, animated: true)
-          //  let savedLeague = leagueViewModel?.getResultLeagues()[indexPath.row]
-        
-//            leagueViewModel?.saveLeagueToCoreData(league: savedLeague ?? League(leagueKey: 0, leagueName: "unkown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""),sport: sport)
-//            print("the saved leahue is \(savedLeague?.leagueName ?? "unknown")")
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Return the desired height for the cell at the specified indexPath
-        return 90// Adjust this value to the desired height
+        return 80// Adjust this value to the desired height
     }
     
   

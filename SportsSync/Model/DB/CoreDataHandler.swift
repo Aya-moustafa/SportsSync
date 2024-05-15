@@ -30,7 +30,7 @@ class CoreDataHandler {
         do{
             let existLeague = try context?.fetch(fetchRequest)
             if !existLeague!.isEmpty {
-                //show alert
+              print("already exist")
             }else {
                 let newLeague = LeaguesFav(context: self.context!)
                 newLeague.leagueKey = Int32 (league.leagueKey ?? 0)
@@ -50,6 +50,15 @@ class CoreDataHandler {
             print("error fetching leagues to if this league exist or not before..\(error.localizedDescription)")
         }
     }
+
+//    func showAlert() {
+//            if let topController = UIApplication.shared.keyWindow?.rootViewController {
+//                let alert = UIAlertController(title: "Already Saved", message: "This League Already Saved In Your Favotites..", preferredStyle: .alert)
+//                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//                alert.addAction(okAction)
+//                topController.present(alert, animated: true, completion: nil)
+//            }
+//        }
     
     func fetchLeaguesFromCoreData () -> [League] {
         do {

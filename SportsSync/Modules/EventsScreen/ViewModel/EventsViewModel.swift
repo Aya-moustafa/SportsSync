@@ -48,13 +48,13 @@ class EventsViewModel{
                 print("Error fetching teams: \(error)")
             }
         }
-    func fetchUpcomingEvents(leagueId: String) {
+    func fetchUpcomingEvents(leagueId: Int) {
             apiService.fetchEvents(leagueId: leagueId, from: getOneYearAgoDate(), to: getNextYearDate()) { result in
                 self.upcomingEventsHandler(result: result)
             }
         }
         
-        func fetchLatestResults(leagueId: String) {
+        func fetchLatestResults(leagueId: Int) {
             apiService.fetchEvents(leagueId: leagueId, from: getTwoYearsAgoDate(), to: getOneYearAgoDate()) { result in
                 self.latestResultsHandler(result: result)
             }

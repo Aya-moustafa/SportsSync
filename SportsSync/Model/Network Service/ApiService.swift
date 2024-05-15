@@ -29,7 +29,7 @@ class ApiService : NetworkProtocol {
         }
     }
     
-    func fetchEvents(leagueId: String, from: String, to: String, completion: @escaping (Result<[Event], Error>) -> Void) {
+    func fetchEvents(leagueId: Int, from: String, to: String, completion: @escaping (Result<[Event], Error>) -> Void) {
         let apiUrl = "https://apiv2.allsportsapi.com/football/?met=Fixtures&leagueId=\(leagueId)&from=\(from)&to=\(to)&APIkey=7d926052ade18d04ebf895c2163d346ff5ad0906c66237812a5235cd56bd7257"
         
         AF.request(apiUrl).responseData { response in

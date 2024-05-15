@@ -11,16 +11,58 @@ class EventsCollectionViewController: UIViewController {
 
     
     
+    @IBOutlet weak var favBtn: UIButton!
+    @IBOutlet weak var leagueName: UILabel!
     var viewModel : EventsViewModel?
-    
-    
+    var savedLeague : League?
+    var leagueViewModel : LeaguesViewModel?
+    var isFavorite : Bool!
+    var leagueSport : String?
+    @IBAction func favBtnHandler(_ sender: Any) {
+        let alertController = UIAlertController(title: "Confirmation", message: isFavorite ? "Are you sure you want to remove this league from favorites?" : "Are you sure you want to add this league to favorites?", preferredStyle: .alert)
+           
+           let confirmAction = UIAlertAction(title: "Yes", style: .default) { _ in
+               if self.isFavorite {
+                   DispatchQueue.main.async {
+                       self.favBtn.setImage(UIImage(systemName: "star"), for: .normal)
+                   }
+                   self.leagueViewModel?.deleteLeagueFromCD(league: self.savedLeague ?? League(leagueKey: 0, leagueName: "unknown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""))
+               } else {
+                   DispatchQueue.main.async {
+                       self.favBtn.setImage(UIImage(systemName: "star.fill"), for: .normal)
+                   }
+                   print("leagueSport = : \(self.leagueSport ?? "unknown sport")")
+                   self.leagueViewModel?.saveLeagueToCoreData(league: self.savedLeague ?? League(leagueKey: 0, leagueName: "unknown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""), sport: self.leagueSport!)
+                   print("the saved league is \(self.savedLeague?.leagueName ?? "unknown")")
+               }
+               self.isFavorite.toggle() // Update the favorite status after the action
+           }
+           
+           let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+           
+           alertController.addAction(confirmAction)
+           alertController.addAction(cancelAction)
+           
+           present(alertController, animated: true, completion: nil)
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let leagueId = "205"
+        print("the selected league is favorite ? \(isFavorite!)")
+       // isFavorite = leagueViewModel?.isFav(league: savedLeague!)
+        if isFavorite == true {
+            DispatchQueue.main.async {
+                self.favBtn.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            }
+        }else{
+            DispatchQueue.main.async {
+                self.favBtn.setImage(UIImage(systemName: "star"), for: .normal)
+            }
+        }
+        leagueName.text = savedLeague?.leagueName
+        let leagueId = 205
         viewModel = EventsViewModel()
-       
+        leagueViewModel = LeaguesViewModel()
         // Do any additional setup after loading the view.
         viewModel?.bindLeaguesToViewController = { [weak self] in
             print ("inside CollectionViewController")
