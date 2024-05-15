@@ -143,12 +143,13 @@ class LeaguesViewController: UIViewController, UITableViewDelegate ,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-   //         let details:ViewController = self.storyboard?.instantiateViewController(withIdentifier: "details") as! ViewController
-   //         details.movie = arr?[indexPath.row]
-   //         self.navigationController?.pushViewController(details, animated: true)
-            let savedLeague = leagueViewModel?.getResultLeagues()[indexPath.row]
-            leagueViewModel?.saveLeagueToCoreData(league: savedLeague ?? League(leagueKey: 0, leagueName: "unkown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""),sport: sport)
-            print("the saved leahue is \(savedLeague?.leagueName ?? "unknown")")
+            let details = self.storyboard?.instantiateViewController(withIdentifier: "eventScreen") as! EventsCollectionViewController
+          //  details.movie = arr?[indexPath.row]
+            self.navigationController?.pushViewController(details, animated: true)
+          //  let savedLeague = leagueViewModel?.getResultLeagues()[indexPath.row]
+        
+//            leagueViewModel?.saveLeagueToCoreData(league: savedLeague ?? League(leagueKey: 0, leagueName: "unkown", countryKey: 0, countryName: "", leagueLogo: "", countryLogo: ""),sport: sport)
+//            print("the saved leahue is \(savedLeague?.leagueName ?? "unknown")")
     }
     
     
