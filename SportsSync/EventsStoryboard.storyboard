@@ -322,6 +322,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="star" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="favBtnHandler:" destination="c9Z-Bm-iex" eventType="touchUpInside" id="pAB-Fy-Xe7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFn-7k-Rs9">
                                 <rect key="frame" x="2" y="85" width="78" height="38.333333333333343"/>
@@ -352,6 +355,7 @@
                     <navigationItem key="navigationItem" id="Qdr-Ih-gDx"/>
                     <connections>
                         <outlet property="collectionView" destination="Mgp-mU-pWw" id="hB2-2G-Z5o"/>
+                        <outlet property="favBtn" destination="KUY-PF-Lbg" id="6Af-5v-025"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3Y-DU-EoP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -535,7 +539,7 @@
         <image name="staroflife.shield.fill" catalog="system" width="128" height="121"/>
         <image name="target" catalog="system" width="128" height="123"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

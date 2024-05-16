@@ -12,8 +12,8 @@ class EventsViewModel{
     
     private var upcomingEvents: [Event] = []
         private var latestEvents: [Event] = []
-        private var teams: [TeamOfPlayers] = []
-        
+     
+        private var allTeams: [Team] = []
         var bindLeaguesToViewController: (() -> Void)?
     
     func upcomingEventsHandler(result: Result<[Event], Error>) {
@@ -30,42 +30,47 @@ class EventsViewModel{
             switch result {
             case .success(let events):
                 latestEvents = events
-                bindLeaguesToViewController?()
+                self.teamsHandler(endPoint: "endPoint")
+                
             case .failure(let error):
                 print("Error fetching latest results: \(error)")
             }
         }
         
-        func teamsHandler(result: Result<[TeamOfPlayers], Error>) {
-            switch result {
-            case .success(let fetchedTeams):
-                teams = fetchedTeams
-                for team in teams {
-                    print("fetching teams: \(team.teamName ?? "default value of team name")")
-                }
-                bindLeaguesToViewController?()
-            case .failure(let error):
-                print("Error fetching teams: \(error)")
-            }
+       
+    func teamsHandler(endPoint: String){
+        print(latestEvents.count)
+        
+        for item in latestEvents{
+            print("enter loop")
+            
+            let team = Team(teamKey: item.homeTeamKey, teamName: item.eventHomeTeam, teamLogo: item.eventHomeTeamLogo)
+        
+            allTeams.append(team)
+            
         }
-    func fetchUpcomingEvents(leagueId: Int) {
-            apiService.fetchEvents(leagueId: leagueId, from: getOneYearAgoDate(), to: getNextYearDate()) { result in
+        bindLeaguesToViewController?()
+    }
+    
+    func fetchUpcomingEvents(leagueId: Int,endPoint : String) {
+        let apiUrl = "https://apiv2.allsportsapi.com/\(endPoint)/?met=Fixtures&leagueId=\(leagueId)&from=\( getOneYearAgoDate())&to=\(getNextYearDate())&APIkey=7d926052ade18d04ebf895c2163d346ff5ad0906c66237812a5235cd56bd7257"
+        apiService.fetchData(urlString: apiUrl) { (result: Result<[Event], Error>) in
+          
                 self.upcomingEventsHandler(result: result)
             }
         }
         
-        func fetchLatestResults(leagueId: Int) {
-            apiService.fetchEvents(leagueId: leagueId, from: getTwoYearsAgoDate(), to: getOneYearAgoDate()) { result in
-                self.latestResultsHandler(result: result)
+        func fetchLatestResults(leagueId: Int,endPoint : String) {
+            let apiUrl = "https://apiv2.allsportsapi.com/\(endPoint)/?met=Fixtures&leagueId=\(leagueId)&from=\(get5YearsAgoDate())&to=\(getOneYearAgoDate())&APIkey=7d926052ade18d04ebf895c2163d346ff5ad0906c66237812a5235cd56bd7257"
+            apiService.fetchData(urlString: apiUrl) { (result: Result<[Event], Error>) in
+               self.latestResultsHandler(result: result)
+              
             }
         }
         
-        func fetchTeams(teamId: String) {
-            apiService.fetchTeams(teamId: teamId) { result in
-                self.teamsHandler(result: result)
-            }
-        }
-        
+   
+
+   
         // MARK: - Data Access
     
         func getUpcomingEvents() -> [Event] {
@@ -76,20 +81,11 @@ class EventsViewModel{
             return latestEvents
         }
         
-        func getTeams() -> [TeamOfPlayers] {
-            return teams
-        }
     
-    func getPlayers(index:Int)-> [Player]{
-        return teams[index].players ?? []
-    }
-    func getCoaches(index:Int)->[Coach]{
-        return teams[index].coaches ?? []
+    func getTeams2() -> [Team] {
+        return allTeams
     }
     
-    func getTeam(index:Int)-> TeamOfPlayers{
-        return teams[index]
-    }
         
         // MARK: - Date Helpers
         
@@ -115,9 +111,9 @@ class EventsViewModel{
             return formatter.string(from: nextYear)
         }
         
-        private func getTwoYearsAgoDate() -> String {
+        private func get5YearsAgoDate() -> String {
             let calendar = Calendar.current
-            let twoYearsAgo = calendar.date(byAdding: .year, value: -2, to: Date())!
+            let twoYearsAgo = calendar.date(byAdding: .year, value: -3, to: Date())!
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             return formatter.string(from: twoYearsAgo)

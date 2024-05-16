@@ -12,8 +12,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
 
     
    
-   // @IBOutlet weak var placeholderLabel: UILabel!
-    @IBOutlet weak var placeHolderLabel: UILabel!
+  
     @IBOutlet weak var favPlaceHolderImage: UIImageView!
     var isFootball : Bool = false
     var favLeaguesViewModel : LeaguesViewModel?
@@ -28,7 +27,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
         favPlaceHolderImage?.image = UIImage(named: "nofav-removebg-preview")
       //  placeholderLabel.isHidden = true
         favPlaceHolderImage.isHidden = true
-        placeHolderLabel.isHidden = true
+       // placeHolderLabel.isHidden = true
         favLeaguesViewModel = LeaguesViewModel()
         favoriteTable.delegate = self
         favoriteTable.dataSource = self
@@ -48,7 +47,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     
     func updateData(leagues: [League]) {
         DispatchQueue.main.async {
-                //   self.favLeaguesViewModel?.favoriteLeagues = leagues
+            
                    self.favoriteTable.reloadData()
         }
     }
@@ -63,20 +62,17 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
         let count = favLeaguesViewModel?.favoriteLeagues.count ?? 0
                if count == 0 {
                   favPlaceHolderImage.isHidden = false
-                   placeHolderLabel.isHidden = false
-                   return 0
+                 return 0
                } else {
                    favPlaceHolderImage.isHidden = true
-                   placeHolderLabel.isHidden = true
-                   return count
+                 return count
                }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "leaguecell", for: indexPath) as! LeagueTableViewCell
         print("the leaguee name from fetching \(favLeaguesViewModel?.favoriteLeagues[0].leagueName ?? "")")
-        //sport = favLeaguesViewModel?.favoriteLeagues[indexPath.row].
-        let league = favLeaguesViewModel?.favoriteLeagues[indexPath.row]
+       let league = favLeaguesViewModel?.favoriteLeagues[indexPath.row]
         cell.leagueName.text = favLeaguesViewModel?.favoriteLeagues[indexPath.row].leagueName
         cell.countryName.text = favLeaguesViewModel?.favoriteLeagues[indexPath.row].countryName
         if let leagueLogo = league?.leagueLogo, let imageURL = URL(string: leagueLogo) {
@@ -94,40 +90,22 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Return the desired height for the cell at the specified indexPath
-        return 90// Adjust this value to the desired height
+      
+        return 90
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          let details = self.storyboard?.instantiateViewController(withIdentifier: "eventScreen") as! EventsCollectionViewController
-        // details.leagueSport = sport
          details.savedLeague = favLeaguesViewModel?.favoriteLeagues[indexPath.row]
          details.isFavorite = true
-         self.navigationController?.pushViewController(details, animated: true)
+         details.modalPresentationStyle = .fullScreen
+         self.present(details, animated: true, completion: nil)
      }
      
      
-     /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-         // Return false if you do not want the specified item to be editable.
-         return true
-     }
-     */
-
-     
-     // Override to support editing the table view.
-      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
          if editingStyle == .delete {
              
              let alertController = UIAlertController(title: "Delete League", message: "Are you sure you want to delete this league from your favorites?", preferredStyle: .alert)
@@ -153,19 +131,5 @@ class FavoriteViewController: UIViewController, UITableViewDelegate ,UITableView
      }
      
 
-     /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-     }
-     */
-
-     /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-         // Return false if you do not want the item to be re-orderable.
-         return true
-     }
-     */
 
 }

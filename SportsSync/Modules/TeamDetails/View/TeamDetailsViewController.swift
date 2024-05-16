@@ -14,19 +14,27 @@ class TeamDetailsViewController: UIViewController {
     @IBOutlet weak var teamLogo: UIImageView!
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var sportLabel: UILabel!
-    var eventsViewModel:EventsViewModel?
-    var index : Int?
-    
+    var viewModel:PlayersViewModel?
+    var teamId : Int = 0
+   
+    var sport : String?
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = PlayersViewModel()
         collectionView.dataSource = self
         collectionView.delegate = self
+        print("id issssssssssssss= \(teamId)")
+        viewModel?.bindLeaguesToViewController = { [weak self] in
+            print ("inside CollectionViewController")
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+        viewModel?.fetchPlayers(leagueId: teamId ?? 62, endPoint: sport ?? "football")
+        let logo1 = viewModel?.getTeam().teamLogo
+        let imageURL = URL(string: logo1 ?? "")
         
-        let logo1 = eventsViewModel?.getTeam(index:index!).teamLogo
-        let imageURL = URL(string: logo1!)
-        
-        // Use Kingfisher to set the image from URL
         teamLogo.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeh"), options: [.transition(.fade(0.2))], completionHandler: { result in
             switch result {
             case .success(_):
@@ -35,14 +43,9 @@ class TeamDetailsViewController: UIViewController {
                 print("Error loading image: \(error)")
             }
         })
-       // teamLogo.image =  eventsViewModel?.getTeam().teamLogo
-        CoatcheNameLabel.text = eventsViewModel?.getCoaches(index: index ?? 0 )[0].coachName
-        teamNameLabel.text = eventsViewModel?.getTeam(index: index ?? 0).teamName
-        
-        // Do any additional setup after loading the view.
+        CoatcheNameLabel.text = viewModel?.getCoaches().coachName
+        teamNameLabel.text = viewModel?.getTeam().teamName
     }
-    
-
 }
 
 
@@ -55,7 +58,7 @@ extension TeamDetailsViewController: UICollectionViewDelegate,UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        
-        return (eventsViewModel?.getPlayers(index: index!).count)!
+        return (viewModel?.getPlayers().count)!
                
             }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -93,13 +96,13 @@ extension TeamDetailsViewController: UICollectionViewDelegate,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        let playerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlayerCell", for: indexPath) as! PlayerCollectionViewCell
      
-        playerCell.playerName.text = eventsViewModel?.getPlayers(index: index ?? 0)[indexPath.row].playerName
-        playerCell.playerTyper.text = eventsViewModel?.getPlayers(index: index ?? 0)[indexPath.row].playerType
-     playerCell.playerNumber.setTitle(eventsViewModel?.getPlayers(index: index ?? 0)[indexPath.row].playerNumber, for: .normal)
+        playerCell.playerName.text = viewModel?.getPlayers()[indexPath.row].playerName
+        playerCell.playerTyper.text = viewModel?.getPlayers()[indexPath.row].playerType
+     playerCell.playerNumber.setTitle(viewModel?.getPlayers()[indexPath.row].playerNumber, for: .normal)
         
         
-      /*  let logo1 = eventsViewModel?.getPlayers(index: index ?? 0)[indexPath.row].playerImage
-        let imageURL = URL(string: logo1!)
+        let logo1 = viewModel?.getPlayers()[indexPath.row].playerImage ?? ""
+        let imageURL = URL(string: logo1)
         
         // Use Kingfisher to set the image from URL
         playerCell.img.kf.setImage(with: imageURL, placeholder: UIImage(named: "placeh"), options: [.transition(.fade(0.2))], completionHandler: { result in
@@ -109,7 +112,7 @@ extension TeamDetailsViewController: UICollectionViewDelegate,UICollectionViewDa
             case .failure(let error):
                 print("Error loading image: \(error)")
             }
-        })*/
+        })
 
                 return playerCell
         

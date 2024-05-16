@@ -10,7 +10,7 @@ import UIKit
 class TeamsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var teamName: UILabel!
     
-    @IBOutlet weak var logo: NSLayoutConstraint!
+    @IBOutlet weak var logo: UIImageView!
     
     override func layoutSubviews() {
         super.layoutSubviews()

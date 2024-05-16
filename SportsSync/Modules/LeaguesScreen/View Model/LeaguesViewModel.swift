@@ -14,8 +14,12 @@ protocol FavoriteLeaguesView{
 
 
 class LeaguesViewModel {
-    //var networkService : NetworkProtocol
-    var favViewModel = FavoriteViewModel()
+//    //var networkService : NetworkProtocol
+//<<<<<<< Updated upstream
+//    var favViewModel = FavoriteViewModel()
+//=======
+//   
+//>>>>>>> Stashed changes
     var bindLeaguesToViewController : (()->()) = {}
     var favoriteLeagues : [League] = [League]()
     private var tableViewToBeRefreshed: FavoriteLeaguesView!
@@ -23,7 +27,7 @@ class LeaguesViewModel {
 
     func loadData(endPoint : String) {
         let url = "\(ApiConstants.baseUrl)/\(endPoint)"
-        ApiService.shared.fetchDataFromAPI(url: url) { result in
+        ApiService.shared.fetchData(urlString: url) { (result: Result<[League], Error>)  in
             switch result {
             case.success(let leagues):
                 print("Received leagues: \(leagues.count)")

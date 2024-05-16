@@ -14,11 +14,11 @@ struct PlayerResponse: Codable {
 }
 
 struct TeamOfPlayers: Codable {
-    let teamKey: Int?
-    let teamName: String?
-    let teamLogo: String?
-    let players: [Player]?
-    let coaches: [Coach]?
+    var teamKey: Int?
+    var teamName: String?
+    var teamLogo: String?
+    var players: [Player]?
+    var coaches: [Coach]?
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"

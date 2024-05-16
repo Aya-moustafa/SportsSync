@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkProtocol{
-    func fetchDataFromAPI(url: String, completion: @escaping (Result<[League], Error>) -> Void)
+    func fetchData<T: Codable>(urlString: String, completion: @escaping (Result<[T], Error>) -> Void) 
 }
