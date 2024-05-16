@@ -21,6 +21,9 @@
 		0098CF1F2BEE78F600138570 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0098CF1E2BEE78F600138570 /* HomeViewController.swift */; };
 		009BEE7C2BF15A4300D6FB25 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BEE7B2BF15A4300D6FB25 /* FavoriteViewController.swift */; };
 		009BEE802BF1616300D6FB25 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BEE7F2BF1616300D6FB25 /* CoreDataHandler.swift */; };
+		00BCCA8E2BF693B9008F9494 /* MockNetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCCA8D2BF693B9008F9494 /* MockNetworkServices.swift */; };
+		00BCCA902BF69435008F9494 /* TestMocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BCCA8F2BF69435008F9494 /* TestMocking.swift */; };
+		00BCCA932BF69553008F9494 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 00BCCA922BF69553008F9494 /* Kingfisher */; };
 		B99580B62BEF71A900454827 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99580B52BEF71A900454827 /* Teams.swift */; };
 		B99580B82BEF71E200454827 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99580B72BEF71E200454827 /* Player.swift */; };
 		B9A11FD92BF656D3009E0514 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B9A11FD82BF656D3009E0514 /* Alamofire */; };
@@ -41,7 +44,6 @@
 		E81E6ECA2BEFA3D500AC2DD6 /* LeagueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E81E6EC82BEFA3D500AC2DD6 /* LeagueTableViewCell.xib */; };
 		E81E6ED12BEFB09800AC2DD6 /* LeaguesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E6ED02BEFB09800AC2DD6 /* LeaguesViewModel.swift */; };
 		E81E6ED32BEFBD4900AC2DD6 /* NetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E6ED22BEFBD4900AC2DD6 /* NetworkProtocol.swift */; };
-		E81E6ED62BEFC5D300AC2DD6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E81E6ED52BEFC5D300AC2DD6 /* Kingfisher */; };
 		E957B7D72BEF49C4008194B3 /* LeagueResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7D62BEF49C4008194B3 /* LeagueResponse.swift */; };
 		E957B7DB2BEF4A4F008194B3 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7DA2BEF4A4F008194B3 /* ApiService.swift */; };
 		E957B7DE2BEF4FE6008194B3 /* EventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E957B7DD2BEF4FE6008194B3 /* EventsResponse.swift */; };
@@ -83,6 +85,8 @@
 		0098CF1E2BEE78F600138570 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		009BEE7B2BF15A4300D6FB25 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		009BEE7F2BF1616300D6FB25 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		00BCCA8D2BF693B9008F9494 /* MockNetworkServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockNetworkServices.swift; path = ../../../TestingUnit2/TestingUnit2Tests/Mocks/MockNetworkServices.swift; sourceTree = "<group>"; };
+		00BCCA8F2BF69435008F9494 /* TestMocking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestMocking.swift; path = ../../../TestingUnit2/TestingUnit2Tests/Mocks/TestMocking.swift; sourceTree = "<group>"; };
 		B99580B52BEF71A900454827 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Teams.swift; path = SportsSync/Model/Teams.swift; sourceTree = SOURCE_ROOT; };
 		B99580B72BEF71E200454827 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B9A33DC12BF3FD4600E47CEA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -112,8 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00BCCA932BF69553008F9494 /* Kingfisher in Frameworks */,
 				B9A11FD92BF656D3009E0514 /* Alamofire in Frameworks */,
-				E81E6ED62BEFC5D300AC2DD6 /* Kingfisher in Frameworks */,
 				00972E702BF3E53000CC123E /* Reachability in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +286,8 @@
 		B9CC4AED2BF5CD9600DD4A49 /* MockTest */ = {
 			isa = PBXGroup;
 			children = (
+				00BCCA8F2BF69435008F9494 /* TestMocking.swift */,
+				00BCCA8D2BF693B9008F9494 /* MockNetworkServices.swift */,
 			);
 			path = MockTest;
 			sourceTree = "<group>";
@@ -398,9 +404,9 @@
 			);
 			name = SportsSync;
 			packageProductDependencies = (
-				E81E6ED52BEFC5D300AC2DD6 /* Kingfisher */,
 				00972E6F2BF3E53000CC123E /* Reachability */,
 				B9A11FD82BF656D3009E0514 /* Alamofire */,
+				00BCCA922BF69553008F9494 /* Kingfisher */,
 			);
 			productName = SportsSync;
 			productReference = 0098CEE82BEE5F2100138570 /* SportsSync.app */;
@@ -475,9 +481,9 @@
 			);
 			mainGroup = 0098CEDF2BEE5F2000138570;
 			packageReferences = (
-				E81E6ED42BEFC5D300AC2DD6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				00972E6E2BF3E53000CC123E /* XCRemoteSwiftPackageReference "Reachability.swift" */,
 				B9A11FD72BF656D3009E0514 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				00BCCA912BF69553008F9494 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 0098CEE92BEE5F2100138570 /* Products */;
 			projectDirPath = "";
@@ -558,7 +564,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00BCCA8E2BF693B9008F9494 /* MockNetworkServices.swift in Sources */,
 				0098CF062BEE5F2300138570 /* SportsSyncTests.swift in Sources */,
+				00BCCA902BF69435008F9494 /* TestMocking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,20 +887,20 @@
 				kind = branch;
 			};
 		};
+		00BCCA912BF69553008F9494 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B9A11FD72BF656D3009E0514 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.9.1;
-			};
-		};
-		E81E6ED42BEFC5D300AC2DD6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -903,15 +911,15 @@
 			package = 00972E6E2BF3E53000CC123E /* XCRemoteSwiftPackageReference "Reachability.swift" */;
 			productName = Reachability;
 		};
+		00BCCA922BF69553008F9494 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00BCCA912BF69553008F9494 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		B9A11FD82BF656D3009E0514 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B9A11FD72BF656D3009E0514 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		E81E6ED52BEFC5D300AC2DD6 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E81E6ED42BEFC5D300AC2DD6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 
