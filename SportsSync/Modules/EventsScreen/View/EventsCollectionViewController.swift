@@ -279,8 +279,8 @@ extension EventsCollectionViewController: UICollectionViewDelegate,UICollectionV
             latestCell.team1.text = viewModel?.getLatestEvents()[indexPath.row].eventHomeTeam
             latestCell.team2.text = viewModel?.getLatestEvents()[indexPath.row].eventAwayTeam
             
-            latestCell.date.text = viewModel?.getUpcomingEvents()[indexPath.row].eventDate ?? "3-3-2022"
-            latestCell.result.text = viewModel?.getUpcomingEvents()[indexPath.row].eventFinalResult
+           // latestCell.date.text = viewModel?.getUpcomingEvents()[indexPath.row].eventDate ?? "3-3-2022"
+          //  latestCell.result.text = viewModel?.getUpcomingEvents()[indexPath.row].eventFinalResult
             let logo1 = viewModel?.getLatestEvents()[indexPath.row].homeTeamLogo ?? " "
             let imageURL = URL(string: logo1)
             
